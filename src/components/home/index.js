@@ -2,6 +2,13 @@ import React, {Component} from 'react';
 import scrap1 from '../../assets/scrap1.png';
 import scrap2 from '../../assets/a2.jpg';
 import scrap3 from '../../assets/a3.jpg';
+import envira from '../../assets/envira.svg';
+import smile from '../../assets/smile.svg';
+import people from '../../assets/people-carry.svg';
+import users from '../../assets/users.svg';
+import truck from '../../assets/truck.svg';
+import service from '../../assets/servicestack.svg';
+
 import {withRouter} from 'react-router-dom';
 
 class HomeComponent extends Component {
@@ -9,12 +16,20 @@ class HomeComponent extends Component {
     super(props);
     this.props = props;
     this.makeAnOffer = this.makeAnOffer.bind(this);
+    this.goFaq = this.goFaq.bind(this);
+    this.goSpec = this.goSpec.bind(this);
   }
 
   makeAnOffer() {
     this.props.history.push('/makeanoffer');
   }
 
+  goFaq() {
+    this.props.history.push('/faq');
+  }
+  goSpec() {
+    this.props.history.push('/spec');
+  }
   render() {
     return (
       <>
@@ -25,6 +40,7 @@ class HomeComponent extends Component {
                 src={scrap1}
                 className="img-rounded"
                 alt="Responsive Image"
+                style={{width: '100%'}}
               />
             </div>
             <div className="col-sm-6">
@@ -32,11 +48,11 @@ class HomeComponent extends Component {
                 type="button"
                 className="btn btn-lg"
                 style={{
-                  width: '500px',
+                  width: '80%',
                   fontSize: 24,
                   border: '1px groove red',
-                  padding: '20px',
-                  margin: '20%',
+                  padding: 'auto',
+                  margin: 'auto',
                 }}
                 onClick={this.makeAnOffer}
               >
@@ -45,22 +61,26 @@ class HomeComponent extends Component {
             </div>
           </div>
         </div>
-        <div class="d-flex bd-highlight">
-          <div class="p-2 flex-fill bd-highlight">
-            <div class="card">
-              <div class="card-body">
-                <p class="card-text">
-                  <button className="btn btn-primary btn-lg" type="button">
+        <div className="row">
+          <div className="col-sm-4">
+            <div className="card">
+              <div className="card-body">
+                <p className="card-text">
+                  <button
+                    className="btn btn-primary btn-lg"
+                    type="button"
+                    onClick={this.goFaq}
+                  >
                     View FAQ's
                   </button>
                 </p>
               </div>
             </div>
           </div>
-          <div class="p-2 flex-fill bd-highlight">
-            <div class="card">
-              <div class="card-body">
-                <p class="card-text">
+          <div className="col-sm-4">
+            <div className="card">
+              <div className="card-body">
+                <p className="card-text">
                   <button className="btn btn-secondary btn-lg" type="button">
                     Click to View Images
                   </button>
@@ -68,11 +88,15 @@ class HomeComponent extends Component {
               </div>
             </div>
           </div>
-          <div class="p-2 flex-fill bd-highlight">
-            <div class="card">
-              <div class="card-body">
-                <p class="card-text">
-                  <button className="btn btn-info btn-lg" type="button">
+          <div className="col-sm-4">
+            <div className="card">
+              <div className="card-body">
+                <p className="card-text">
+                  <button
+                    className="btn btn-info btn-lg"
+                    type="button"
+                    onClick={this.goSpec}
+                  >
                     View Spec Sheets
                   </button>
                 </p>
@@ -80,8 +104,8 @@ class HomeComponent extends Component {
             </div>
           </div>
         </div>
-        <div class="d-flex bd-highlight">
-          <div class="p-2 flex-fill bd-highlight">
+        <div className="row">
+          <div className="col-sm-6">
             <p className="lead">
               We envision a cleaner and greener world in which waste is properly
               recycled. Therefore, we strive to turn our waste stream into a
@@ -105,36 +129,84 @@ class HomeComponent extends Component {
               earning your loyal business is our #1 goal.
             </p>
           </div>
-          <div class="p-2 flex-fill bd-highlight">
+          <div className="col-sm-6">
             <div
               id="carouselExampleSlidesOnly"
-              class="carousel slide"
+              className="carousel slide"
               data-ride="carousel"
             >
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img class="d-block w-100" src={scrap2} alt="First slide" />
+              <div className="carousel-inner">
+                <div className="carousel-item active">
+                  <img
+                    className="d-block w-100"
+                    src={scrap2}
+                    alt="First slide"
+                  />
                 </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src={scrap3} alt="Second slide" />
+                <div className="carousel-item">
+                  <img
+                    className="d-block w-100"
+                    src={scrap3}
+                    alt="Second slide"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <br />
+        <br />
         <h3>Our Company Values</h3>
-
-        <div class="d-flex bd-highlight">
-          <div class="p-2 flex-fill bd-highlight">
+        <div className="row">
+          <div className="col-sm-2">
+            <img
+              src={envira}
+              alt="environment"
+              style={{width: '75px', height: '75px'}}
+            />
             <p className="lead">Serving the Environment</p>
+          </div>
+          <div className="col-sm-2">
+            <img
+              src={people}
+              alt="people"
+              style={{width: '75px', height: '75px'}}
+            />
             <p className="lead">Invest in People</p>
+          </div>
+          <div className="col-sm-2">
+            <img
+              src={smile}
+              alt="smile"
+              style={{width: '75px', height: '75px'}}
+            />
             <p className="lead">Gurantee the Customer</p>
+          </div>
+          <div className="col-sm-2">
+            <img
+              src={service}
+              alt="service"
+              style={{width: '75px', height: '75px'}}
+            />
             <p className="lead">Provide exceptional service</p>
+          </div>
+          <div className="col-sm-2">
+            <img
+              src={users}
+              alt="users"
+              style={{width: '75px', height: '75px'}}
+            />
             <p className="lead">Work as a Team</p>
+          </div>
+          <div className="col-sm-2">
+            <img
+              src={truck}
+              alt="truck"
+              style={{width: '75px', height: '75px'}}
+            />
             <p className="lead">Deliver Value</p>
           </div>
         </div>
-        ©2018 scrapit.com – All rights reserved – Terms and Conditions: Sales | Purchase Orders
       </>
     );
   }

@@ -10,6 +10,10 @@ class App extends React.Component {
     return (
       <div className="container-fluid">
         <header>{Routes()}</header>
+        <footer className="footer navbar-fixed-bottom">
+          ©2020 nameitlater.com – All rights reserved – Terms and Conditions:
+          Sales | Purchase Orders
+        </footer>
       </div>
     );
   }
