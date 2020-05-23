@@ -7,12 +7,23 @@ import MakeAnOffer from './components/make-an-offer';
 import createHistory from 'history/createBrowserHistory';
 import FAQComponent from './components/faq';
 import SpecViewComponent from './components/spec';
+import logo from './assets/scrapanything.png';
 
 const Routes = () => {
   const history = createHistory();
   return (
     <Router>
       <div>
+        <img
+          src={logo}
+          alt="logo"
+          style={{
+            width: '150px',
+            height: '50px',
+            position: 'absolute',
+            padding: '10px',
+          }}
+        />
         <ul className="nav justify-content-end">
           <li className="nav-item">
             <Link to="/" className="nav-link active">
