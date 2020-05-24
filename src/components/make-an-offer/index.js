@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {sendEmail} from '../services/email';
 
 export default class MakeAnOffer extends Component {
   constructor(props) {
@@ -9,7 +10,17 @@ export default class MakeAnOffer extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    console.log(e.currentTarget, e.target);
+    sendEmail({
+      firstName: e.target[0].value,
+      lastName: e.target[1].value,
+      phone: e.target[2].value,
+      businessName: e.target[3].value,
+      email: e.target[4].value,
+      whatisit: e.target[5].value,
+      materials: e.target[6].value,
+      weight: e.target[7].value,
+      contaminants: e.target[8].value,
+    });
   }
   render() {
     return (
@@ -126,7 +137,10 @@ export default class MakeAnOffer extends Component {
               </div>
             </div>
             <div className="form-group row">
-              <label htmlFor="contaminants" className="col-form-label  col-sm-12">
+              <label
+                htmlFor="contaminants"
+                className="col-form-label  col-sm-12"
+              >
                 Are There Any Contaminants? If so, please describe.
               </label>
               <div className="col-sm-10">
@@ -136,25 +150,6 @@ export default class MakeAnOffer extends Component {
                   id="contaminants"
                   placeholder="Explain the scrap contaminants"
                 />
-              </div>
-            </div>
-            <div className="form-group row">
-              <label htmlFor="contaminants" className="col-form-label  col-sm-12">
-                Upload Photos Of Your Scrap (Up To 10 Images)
-              </label>
-              <div className="col-sm-10">
-                <input
-                  type="file"
-                  className="custom-file-input"
-                  id="validatedInputGroupCustomFile"
-                  required
-                />
-                <label
-                  className="custom-file-label col-sm-12"
-                  htmlFor="validatedInputGroupCustomFile"
-                >
-                  Choose file...
-                </label>
               </div>
             </div>
             <div className="form-group row">
