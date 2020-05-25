@@ -4,7 +4,10 @@ export default class AboutusComponent extends Component {
   render() {
     return (
       <div>
-      <p className="h3">About Us</p>
+        <br />
+        <br />
+        <p className="h3">About Us</p>
+        <br />
         <p className="lead">
           We take pride in being a top service provider through our sales,
           logistics and accounting departments. Dealing with us is convenient,

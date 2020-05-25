@@ -25,6 +25,8 @@ export default class MakeAnOffer extends Component {
   render() {
     return (
       <div>
+        <br />
+        <br />
         <p className="h4">Get A Quick Quote For Your Scrap</p>
         <p className="lead">
           Fill in the quote request form below to tell us more about your scrap

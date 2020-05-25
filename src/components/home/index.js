@@ -8,6 +8,7 @@ import people from '../../assets/people-carry.svg';
 import users from '../../assets/users.svg';
 import truck from '../../assets/truck.svg';
 import service from '../../assets/servicestack.svg';
+import './index.css';
 
 import {withRouter} from 'react-router-dom';
 
@@ -40,20 +41,13 @@ class HomeComponent extends Component {
                 src={scrap1}
                 className="img-rounded"
                 alt="Responsive Image"
-                style={{width: '100%'}}
+                style={{width: '100%', height: '100%'}}
               />
             </div>
             <div className="col-sm-6">
               <button
                 type="button"
-                className="btn btn-lg"
-                style={{
-                  width: '80%',
-                  fontSize: 24,
-                  border: '1px groove red',
-                  padding: 'auto',
-                  margin: 'auto',
-                }}
+                className="button"
                 onClick={this.makeAnOffer}
               >
                 Get your Scrap Management Offer Today
@@ -141,6 +135,7 @@ class HomeComponent extends Component {
                     className="d-block w-100"
                     src={scrap2}
                     alt="First slide"
+                    style={{width: '100%', height: '100%'}}
                   />
                 </div>
                 <div className="carousel-item">
@@ -148,6 +143,7 @@ class HomeComponent extends Component {
                     className="d-block w-100"
                     src={scrap3}
                     alt="Second slide"
+                    style={{width: '100%', height: '100%'}}
                   />
                 </div>
               </div>
