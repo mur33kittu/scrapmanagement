@@ -19,6 +19,7 @@ class HomeComponent extends Component {
     this.makeAnOffer = this.makeAnOffer.bind(this);
     this.goFaq = this.goFaq.bind(this);
     this.goSpec = this.goSpec.bind(this);
+    this.goServicesAndPricing = this.goServicesAndPricing.bind(this);
   }
 
   makeAnOffer() {
@@ -30,6 +31,9 @@ class HomeComponent extends Component {
   }
   goSpec() {
     this.props.history.push('/spec');
+  }
+  goServicesAndPricing() {
+    this.props.history.push('/services');
   }
   render() {
     return (
@@ -75,8 +79,12 @@ class HomeComponent extends Component {
             <div className="card">
               <div className="card-body">
                 <p className="card-text">
-                  <button className="btn btn-secondary btn-lg" type="button">
-                    Click to View Images
+                  <button
+                    className="btn btn-secondary btn-lg"
+                    type="button"
+                    onClick={this.goServicesAndPricing}
+                  >
+                    Pricing
                   </button>
                 </p>
               </div>

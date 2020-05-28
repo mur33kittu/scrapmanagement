@@ -1,20 +1,18 @@
-const express = require('express');
-const router = express.Router();
+'use strict';
 
+const router = express.Router();
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: '',
-    pass: '',
+    user: 'indoorsale0@gmail.com',
+    pass: 'Suchi@1992',
   },
 });
 
-router.post('/sendEmail', function (req, res) {
-  // const dat = JSON.parse(JSON.stringify(req.body));
-  // console.log(JSON.parse(Object.keys(req.body)[0]));
+router.post('/sendEmail', (req, res) => {
   const data = JSON.parse(Object.keys(req.body)[0]);
-  
+
   const mailoptions = {
     from: 'indoorsale0@gmail.com',
     to: 'indoorsale0@gmail.com,' + data.email,
@@ -51,9 +49,15 @@ router.post('/sendEmail', function (req, res) {
   transporter.sendMail(mailoptions, (error, info) => {
     if (error) {
       console.log(error);
-      res.status(500).send('error sending email. please try again');
+      callback(null, {
+        statusCode: 500,
+        body: JSON.stringify(response),
+      });
     } else {
-      res.status(200).send('email sent');
+      callback(null, {
+        statusCode: 200,
+        body: JSON.stringify(response),
+      });
     }
   });
 });

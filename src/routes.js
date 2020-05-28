@@ -8,6 +8,7 @@ import createHistory from 'history/createBrowserHistory';
 import FAQComponent from './components/faq';
 import SpecViewComponent from './components/spec';
 import logo from './assets/scrapanything.png';
+import ServicesOfferedComponent from './components/services-offered';
 
 const Routes = () => {
   const history = createHistory();
@@ -33,6 +34,11 @@ const Routes = () => {
           <li className="nav-item">
             <Link to="/about" className="nav-link">
               About
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/services" className="nav-link">
+              Services/Pricing
             </Link>
           </li>
           <li className="nav-item">
@@ -64,6 +70,9 @@ const Routes = () => {
           </Route>
           <Route path="/spec">
             <SpecViewComponent />
+          </Route>
+          <Route path="/services">
+            <ServicesOfferedComponent />
           </Route>
           <Route path="/">
             <HomeComponent history={history} />

@@ -1,0 +1,19 @@
+service: expressAPI-scraps
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: us-east-2
+  memorySize: 128
+functions:
+  app:
+    handler: app.handler
+    events: 
+      - http: 
+          path: /
+          method: GET
+          cors: true
+      - http: 
+          path: /{proxy+}
+          method: ANY
+          cors: true
