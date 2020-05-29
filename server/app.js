@@ -1,60 +1,124 @@
-const express = require('express');
-const serverless = require('serverless-http');
-// const emailRouter = require('./sendEmail');
-const app = express();
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
+// Require objects.
+var express = require('express');
+var app = express();
+var aws = require('aws-sdk');
+var bodyParser = require('body-parser');
 
-var AWS = require('aws-sdk');
-const SESConfig = {
-  apiVersion: '2010-12-21',
-  accessKeyId: 'AKIAJHITOGVY7KYIHTQQ',
-  secretAccessKey: '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',
-  region: 'us-east-2'
-}
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
-app.get('/ping', (req, res) => {
-  res.send({message: 'Ping!!! Pong!!!!'});
-});
+// Edit this with YOUR email address.
+var email = 'indoorsale0@gmail.com';
 
-app.post('/test', (req, res) => {
-  res.send({message: req.body});
-});
+// Load your AWS credentials and try to instantiate the object.
+aws.config.loadFromPath(__dirname + '/config.json');
 
-app.post('/sendEmail', (req, res) => {
-  // const data = req.body;
+// Instantiate SES.
+var ses = new aws.SES();
+
+// Verify email addresses.
+app.get('/verify', function (req, res) {
   var params = {
+    EmailAddress: email,
+  };
+
+  ses.verifyEmailAddress(params, function (err, data) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(data);
+    }
+  });
+});
+
+// Listing the verified email addresses.
+app.get('/list', function (req, res) {
+  ses.listVerifiedEmailAddresses(function (err, data) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(data);
+    }
+  });
+});
+
+// Deleting verified email addresses.
+app.get('/delete', function (req, res) {
+  var params = {
+    EmailAddress: email,
+  };
+
+  ses.deleteVerifiedEmailAddress(params, function (err, data) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(data);
+    }
+  });
+});
+
+// Sending RAW email including an attachment.
+app.post('/sendEmail', function (req, res) {
+  const data = req.body;
+  var eParams = {
     Destination: {
       ToAddresses: ['indoorsale0@gmail.com'],
     },
     Message: {
       Body: {
         Html: {
-          Charset: 'UTF-8',
-          Data: '<h1>Hello</h1>'
+          Data:
+            '<table><tr><td>First Name:' +
+            data.firstName +
+            '</td></tr>' +
+            '<tr><td>Last Name:' +
+            data.lastName +
+            '</td></tr>' +
+            '<tr><td>Phone: ' +
+            data.phone +
+            '</td></tr>' +
+            '<tr><td>Business Name: ' +
+            data.businessName +
+            '</td></tr>' +
+            '<tr><td>Email: ' +
+            data.email +
+            '</td></tr>' +
+            '<tr><td>Whatisit: ' +
+            data.whatisit +
+            '</td></tr>' +
+            '<tr><td>Materials: ' +
+            data.materials +
+            '</td></tr>' +
+            '<tr><td>weight: ' +
+            data.weight +
+            '</td></tr>' +
+            '<tr><td>contaminants: ' +
+            data.contaminants +
+            '</td></tr>',
         },
       },
       Subject: {
-        Charset: 'UTF-8',
-        Data: 'Test email',
+        //template or environment variable
+        Data: 'Scrap Request from ' + data.firstName + ' ' + data.lastName,
       },
     },
-    Source: 'indoorsale0@gmail.com' /* required */,
+    //environment variable
+    Source: 'indoorsale0@gmail.com',
   };
-
-  var sendPromise = new AWS.SES(SESConfig)
-    .sendEmail(params)
-    .promise();
-
-  // Handle promise's fulfilled/rejected states
-  sendPromise
-    .then(function (data) {
-      console.log('success');
-    })
-    .catch(function (err) {
-      console.error(err);
-    });
+  
+  ses.sendEmail(eParams, function (err, data) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(data);
+    }
+  });
 });
 
-app.listen(3000, () => console.log('server running port 3000'));
-// module.exports.handler = serverless(app);
+// Start server.
+var server = app.listen(80, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('AWS SES example app listening at http://%s:%s', host, port);
+});
