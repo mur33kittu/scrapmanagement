@@ -8,7 +8,7 @@
     "deploy": "serverless deploy",
     "awsauth": "serverless config credentials --provider aws --key AKIAIGX366V7CV3K5HUQ --secret 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 -o"
   },
-  "keywords": [],
+  "keywords": ["api website"],
   "author": "",
   "license": "ISC",
   "dependencies": {
