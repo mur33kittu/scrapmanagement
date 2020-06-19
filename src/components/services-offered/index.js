@@ -83,7 +83,7 @@ export default class ServicesOfferedComponent extends Component {
           </thead>
           <tbody>
             {items.map((item, i) => (
-              <tr scope="row" key={i}>
+              <tr>
                 <td>{item.key}</td>
                 <td>
                   {item.value}&nbsp;&nbsp;
