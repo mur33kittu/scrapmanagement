@@ -44,7 +44,6 @@ class HomeComponent extends Component {
               <img
                 src={scrap1}
                 className="img-rounded"
-                alt="Responsive Image"
                 style={{width: '100%', height: '100%'}}
               />
             </div>
