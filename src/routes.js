@@ -4,14 +4,14 @@ import AboutusComponent from './components/about';
 import ContactusComponent from './components/contactus';
 import HomeComponent from './components/home';
 import MakeAnOffer from './components/make-an-offer';
-import createHistory from 'history/createBrowserHistory';
+// import createHistory from 'history/createBrowserHistory';
 import FAQComponent from './components/faq';
 import SpecViewComponent from './components/spec';
 import logo from './assets/scrapanything.png';
 import ServicesOfferedComponent from './components/services-offered';
 
 const Routes = () => {
-  const history = createHistory();
+  // const history = createHistory();
   return (
     <Router>
       <div>
@@ -75,7 +75,7 @@ const Routes = () => {
             <ServicesOfferedComponent />
           </Route>
           <Route path="/">
-            <HomeComponent history={history} />
+            <HomeComponent />
           </Route>
         </Switch>
       </div>

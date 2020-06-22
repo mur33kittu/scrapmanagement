@@ -5,6 +5,7 @@ class Modal extends Component {
     super(props);
     this.props = props;
     this.state = {
+      costValue: 0,
       calculatedValue: 0,
       askingCalculatedValue: 0,
     };
@@ -14,10 +15,10 @@ class Modal extends Component {
 
   calculateFinalCost = (e) => {
     const finalCost = this.props.data.value * e.target.value;
-    this.setState({calculatedValue: finalCost});
+    this.setState({calculatedValue: finalCost, costValue: e.target.value});
   };
   calculateAskingFinalCost = (e) => {
-    const finalCost = this.state.calculatedValue * e.target.value;
+    const finalCost = this.state.costValue * e.target.value;
     this.setState({askingCalculatedValue: finalCost});
   };
   render() {
@@ -61,7 +62,7 @@ class Modal extends Component {
               <div className="modal-body">
                 <form>
                   <div className="form-group">
-                    <label for="weight" className="col-form-label">
+                    <label htmlFor="weight" className="col-form-label">
                       Weight in kgs:
                     </label>
                     <input
@@ -72,13 +73,13 @@ class Modal extends Component {
                     />
                   </div>
                   <div className="form-group">
-                    <label for="price" className="col-form-label">
+                    <label htmlFor="price" className="col-form-label">
                       Price:
                     </label>
                     {this.props.data.value}
                   </div>
                   <div className="form-group">
-                    <label for="price" className="col-form-label">
+                    <label htmlFor="price" className="col-form-label">
                       Asking Price:
                     </label>
                     <input
@@ -89,13 +90,13 @@ class Modal extends Component {
                     />
                   </div>
                   <div className="form-group">
-                    <label for="weight" className="col-form-label">
+                    <label htmlFor="weight" className="col-form-label">
                       Calculative Price:
                     </label>
                     {this.state.calculatedValue}
                   </div>
                   <div className="form-group">
-                    <label for="weight" className="col-form-label">
+                    <label htmlFor="weight" className="col-form-label">
                       Asking Calculative Price:
                     </label>
                     {this.state.askingCalculatedValue}
