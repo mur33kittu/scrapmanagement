@@ -37,90 +37,92 @@ class HomeComponent extends Component {
   }
   render() {
     return (
-      <main>
-        <div className="container">
-          <div className="row mt-5 pt-5">
-            <div className="col text-center">
-              <div className="card card-image">
-                <div className="text-white text-center rgba-stylish-strong py-5 px-4">
-                  <div className="py-5">
-                    <h5 className="h5 orange-text">
-                      <i className="fas fa-camera-retro"></i> Scrap Anything
-                    </h5>
+      <>
+        <div className="row mt-5 pt-5">
+          <div className="col text-center">
+            <div className="card card-image">
+              <div className="text-white text-center rgba-stylish-strong py-5 px-4">
+                <div className="py-5">
+                  <h5 className="h5 orange-text">
+                    <i className="fas fa-camera-retro"></i> Scrap Anything
+                  </h5>
 
-                    <p className="mb-4 pb-2 px-md-5 mx-md-5">
-                      Please use the below button to request for scrap request
-                    </p>
-                    <a className="btn peach-gradient" onClick={this.makeAnOffer}>
-                      <i className="fas fa-clone left"></i> Get your Scrap
-                      Management Offer Today
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="row px-1 pt-5">
-            <div className="col-md-3">
-              <div className="card card-image">
-                <div className="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-                  <div>
-                    <h5 className="pink-text">
-                      <i className="fas fa-chart-pie"></i> Faq's
-                    </h5>
-                    <h3 className="card-title pt-2">
-                      <strong>View FAQ</strong>
-                    </h3>
-                    <p>Use the below link to frequently asked questions</p>
-                    <a className="btn btn-pink" onClick={this.goFaq}>
-                      <i className="fas fa-clone left"></i> View FAQ
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="card card-image">
-                <div className="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-                  <div>
-                    <h5 className="pink-text">
-                      <i className="fas fa-chart-pie"></i> Pricing
-                    </h5>
-                    <h3 className="card-title pt-2">
-                      <strong>View Pricing for all the scraps here</strong>
-                    </h3>
-                    <p>
-                      Use below link to check the current price for the scraps
-                      requested
-                    </p>
-                    <a className="btn btn-pink" onClick={this.goServicesAndPricing}>
-                      <i className="fas fa-clone left"></i> Pricing
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3">
-              <div className="card card-image">
-                <div className="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-                  <div>
-                    <h5 className="pink-text">
-                      <i className="fas fa-chart-pie"></i> Spec Sheets
-                    </h5>
-                    <h3 className="card-title pt-2">
-                      <strong>Coming Soon</strong>
-                    </h3>
-                    <p>No data yet</p>
-                    <a className="btn btn-pink" onClick={this.goSpec}>
-                      <i className="fas fa-clone left"></i> Spec Sheets
-                    </a>
-                  </div>
+                  <p className="mb-4 pb-2 px-md-5 mx-md-5">
+                    Please use the below button to request for scrap request
+                  </p>
+                  <a className="btn peach-gradient" onClick={this.makeAnOffer}>
+                    <i className="fas fa-clone left"></i> Get your Scrap
+                    Management Offer Today
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <div className="row px-1 pt-5">
+          <div className="col-md-3">
+            <div className="card card-image">
+              <div className="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+                <div>
+                  <h5 className="pink-text">
+                    <i className="fas fa-chart-pie"></i> Faq's
+                  </h5>
+                  <h3 className="card-title pt-2">
+                    <strong>View FAQ</strong>
+                  </h3>
+                  <p>Use the below link to frequently asked questions</p>
+                  <a className="btn btn-pink" onClick={this.goFaq}>
+                    <i className="fas fa-clone left"></i> View FAQ
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="card card-image">
+              <div className="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+                <div>
+                  <h5 className="pink-text">
+                    <i className="fas fa-chart-pie"></i> Pricing
+                  </h5>
+                  <h3 className="card-title pt-2">
+                    <strong>View Pricing for all the scraps here</strong>
+                  </h3>
+                  <p>
+                    Use below link to check the current price for the scraps
+                    requested
+                  </p>
+                  <a
+                    className="btn btn-pink"
+                    onClick={this.goServicesAndPricing}
+                  >
+                    <i className="fas fa-clone left"></i> Pricing
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div className="card card-image">
+              <div className="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+                <div>
+                  <h5 className="pink-text">
+                    <i className="fas fa-chart-pie"></i> Spec Sheets
+                  </h5>
+                  <h3 className="card-title pt-2">
+                    <strong>Coming Soon</strong>
+                  </h3>
+                  <p>No data yet</p>
+                  <a className="btn btn-pink" onClick={this.goSpec}>
+                    <i className="fas fa-clone left"></i> Spec Sheets
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="row ml-5 pt-5 mb-5">
           <div className="col-md-3">
             <div
@@ -212,7 +214,7 @@ class HomeComponent extends Component {
             </div>
           </div>
         </div>
-      </main>
+      </>
     );
   }
 }

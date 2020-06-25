@@ -1,124 +1,57 @@
 import React, {Component} from 'react';
+import {
+  MDBContainer,
+  MDBBtn,
+  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
+  MDBModalFooter,
+} from 'mdbreact';
 
 class Modal extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-    this.state = {
-      costValue: 0,
-      calculatedValue: 0,
-      askingCalculatedValue: 0,
-    };
-    this.calculateFinalCost = this.calculateFinalCost.bind(this);
-    this.calculateAskingFinalCost = this.calculateAskingFinalCost.bind(this);
+    // console.log(this.props.data);
   }
+  state = {
+    modal8: false,
+    modal9: false,
+  };
 
-  calculateFinalCost = (e) => {
-    const finalCost = this.props.data.value * e.target.value;
-    this.setState({calculatedValue: finalCost, costValue: e.target.value});
+  toggle = (nr) => () => {
+    let modalNumber = 'modal' + nr;
+    this.setState({
+      [modalNumber]: !this.state[modalNumber],
+    });
   };
-  calculateAskingFinalCost = (e) => {
-    const finalCost = this.state.costValue * e.target.value;
-    this.setState({askingCalculatedValue: finalCost});
-  };
+
   render() {
     return (
-      <>
-        <button
-          type="button"
-          className={this.props.class}
-          data-toggle="modal"
-          data-target={`#${this.props.rowIndex}`}
-          key={this.props.rowIndex}
+      <MDBContainer>
+        <MDBBtn color="info" onClick={this.toggle(9)}>
+          Calculate Cost
+        </MDBBtn>
+        <MDBModal
+          isOpen={this.state.modal9}
+          toggle={this.toggle(9)}
+          fullHeight
+          position="bottom"
         >
-          {this.props.title}
-        </button>
-        <div
-          className="modal fade"
-          id={this.props.rowIndex}
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalCenterTitle"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5
-                  className="modal-title"
-                  id={`${this.props.rowIndex}exampleModalLongTitle`}
-                >
-                  {this.props.data.key}
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <form>
-                  <div className="form-group">
-                    <label htmlFor="weight" className="col-form-label">
-                      Weight in kgs:
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="price"
-                      onChange={this.calculateFinalCost}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="price" className="col-form-label">
-                      Price:
-                    </label>
-                    {this.props.data.value}
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="price" className="col-form-label">
-                      Asking Price:
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="askingPrice"
-                      onChange={this.calculateAskingFinalCost}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="weight" className="col-form-label">
-                      Calculative Price:
-                    </label>
-                    {this.state.calculatedValue}
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="weight" className="col-form-label">
-                      Asking Calculative Price:
-                    </label>
-                    {this.state.askingCalculatedValue}
-                  </div>
-                </form>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" className="btn btn-primary">
-                  Save changes
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
+          <MDBModalHeader toggle={this.toggle(9)}>
+            Title Goes here
+          </MDBModalHeader>
+          <MDBModalBody>
+            Modal Goes here
+          </MDBModalBody>
+          <MDBModalFooter>
+            <MDBBtn color="secondary" onClick={this.toggle(9)}>
+              Close
+            </MDBBtn>
+            <MDBBtn color="primary">Save changes</MDBBtn>
+          </MDBModalFooter>
+        </MDBModal>
+      </MDBContainer>
     );
   }
 }
