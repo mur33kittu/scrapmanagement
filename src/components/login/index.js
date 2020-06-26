@@ -9,18 +9,14 @@ class LoginFormComponent extends Component {
     name: '',
   };
 
-  componentDidMount() {
-    console.log(process.env.googleClientId);
-  }
   responseFacebook = (response) => {
-    console.log(response);
     this.setState({name: response.name});
   };
 
   responseGoogle = (response) => {
     console.log(response);
     this.setState({
-      name: response.profileObj.familName + '' + response.profileObj.givenName,
+      name: response.profileObj.givenName + ' ' + response.profileObj.familyName,
     });
   };
 
