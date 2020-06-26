@@ -88,6 +88,6 @@ export class MapContainer extends Component {
 const LoadingContainer = (props) => <div>Fancy loading container!</div>;
 
 export default GoogleApiWrapper({
-  apiKey: process.env.API_KEY,
+  apiKey: process.env.REACT_APP_API_KEY,
   LoadingContainer: LoadingContainer,
 })(MapContainer);

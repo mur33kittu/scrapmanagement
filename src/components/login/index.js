@@ -19,6 +19,9 @@ class LoginFormComponent extends Component {
 
   responseGoogle = (response) => {
     console.log(response);
+    this.setState({
+      name: response.profileObj.familName + '' + response.profileObj.givenName,
+    });
   };
 
   render() {
@@ -49,7 +52,7 @@ class LoginFormComponent extends Component {
               </div>
               <div class="modal-body mb-0  text-center">
                 <FacebookLogin
-                  appId={process.env.facebookAppId}
+                  appId={process.env.REACT_APP_facebookAppId}
                   fields="name,email,picture"
                   icon={<GrFacebookOption />}
                   callback={this.responseFacebook}
@@ -57,7 +60,7 @@ class LoginFormComponent extends Component {
                 />
                 &nbsp;&nbsp; &nbsp;
                 <GoogleLogin
-                  clientId={process.env.googleClientId}
+                  clientId={process.env.REACT_APP_googleClientId}
                   buttonText=""
                   icon={<GrGoogle />}
                   onSuccess={this.responseGoogle}
