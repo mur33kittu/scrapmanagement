@@ -8,6 +8,10 @@ class LoginFormComponent extends Component {
   state = {
     name: '',
   };
+
+  componentDidMount() {
+    console.log(process.env.googleClientId);
+  }
   responseFacebook = (response) => {
     console.log(response);
     this.setState({name: response.name});
