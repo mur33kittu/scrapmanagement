@@ -52,7 +52,7 @@ export default class ServicesOfferedComponent extends Component {
             />
             <MDBRow>
               {this.state.selectedOptions.map((option, optKey) => (
-                <MDBCol md="2" key={optKey}>
+                <MDBCol md="2" key={optKey} className="pt-4">
                   <MDBCard>
                     <MDBCardBody cascade className="text-center">
                       <MDBCardTitle className="card-title">
