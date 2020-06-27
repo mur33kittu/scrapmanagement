@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {MDBIcon, MDBTooltip} from 'mdbreact';
+import {MDBIcon, MDBBadge} from 'mdbreact';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import {GrGoogle, GrFacebookOption} from 'react-icons/gr';
@@ -7,16 +7,18 @@ import {GrGoogle, GrFacebookOption} from 'react-icons/gr';
 class LoginFormComponent extends Component {
   state = {
     name: '',
+    loginType: '',
   };
 
   responseFacebook = (response) => {
-    this.setState({name: response.name});
+    this.setState({name: response.name, loginType: 'facebook'});
   };
 
   responseGoogle = (response) => {
-    console.log(response);
     this.setState({
-      name: response.profileObj.givenName + ' ' + response.profileObj.familyName,
+      name:
+        response.profileObj.givenName + ' ' + response.profileObj.familyName,
+      loginType: 'google',
     });
   };
 
@@ -33,20 +35,20 @@ class LoginFormComponent extends Component {
         >
           <div className="modal-dialog cascading-modal" role="document">
             <div className="modal-content">
-              <div class="modal-header light-blue darken-3 white-text">
-                <h4 class="title">
-                  <i class="fas fa-users"></i> Login with your Social Network
+              <div className="modal-header light-blue darken-3 white-text">
+                <h4 className="title">
+                  <i className="fas fa-users"></i> Login with your Social Network
                 </h4>
                 <button
                   type="button"
-                  class="close"
+                  className="close"
                   data-dismiss="modal"
                   aria-label="Close"
                 >
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body mb-0  text-center">
+              <div className="modal-body mb-0  text-center">
                 <FacebookLogin
                   appId={process.env.REACT_APP_facebookAppId}
                   fields="name,email,picture"
@@ -69,6 +71,17 @@ class LoginFormComponent extends Component {
         </div>
         <div className="text-center">
           <MDBIcon icon="user" data-toggle="modal" data-target="#modalLRForm" />
+          <div>
+            <MDBBadge pill color="primary" className="ml-2">
+              {this.state.loginType === 'facebook' && (
+                <MDBIcon fab icon="facebook-f" />
+              )}
+              {this.state.loginType === 'google' && (
+                <MDBIcon fab icon="google" />
+              )}
+              {this.state.name}
+            </MDBBadge>            
+          </div>
         </div>
       </>
     );

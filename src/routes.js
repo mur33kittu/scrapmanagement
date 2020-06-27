@@ -10,7 +10,6 @@ import {
   MDBCollapse,
   MDBDropdown,
   MDBDropdownToggle,
-  MDBIcon,
 } from 'mdbreact';
 import LoginFormComponent from './components/login';
 
@@ -43,7 +42,7 @@ class Routes extends React.Component {
               {key: '/contact', value: 'Contact Us'},
               {key: '/makeanoffer', value: 'Make An Offer'},
             ].map((path, index) => (
-              <MDBNavItem>
+              <MDBNavItem key={index}>
                 <MDBNavLink to={path.key} key={index}>
                   {path.value}
                 </MDBNavLink>

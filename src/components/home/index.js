@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import scrap1 from '../../assets/scrap1.png';
-import scrap2 from '../../assets/a2.jpg';
+// import scrap1 from '../../assets/scrap1.png';
+// import scrap2 from '../../assets/a2.jpg';
 import scrap3 from '../../assets/a3.jpg';
-import envira from '../../assets/envira.svg';
-import smile from '../../assets/smile.svg';
-import people from '../../assets/people-carry.svg';
-import users from '../../assets/users.svg';
-import truck from '../../assets/truck.svg';
-import service from '../../assets/servicestack.svg';
+// import envira from '../../assets/envira.svg';
+// import smile from '../../assets/smile.svg';
+// import people from '../../assets/people-carry.svg';
+// import users from '../../assets/users.svg';
+// import truck from '../../assets/truck.svg';
+// import service from '../../assets/servicestack.svg';
 import './index.css';
 
 import {withRouter} from 'react-router-dom';
