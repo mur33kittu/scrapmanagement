@@ -28,7 +28,7 @@ class Routes extends React.Component {
 
   render() {
     return (
-      <MDBNavbar color="default-color" dark expand="md">
+      <MDBNavbar color="default-color" dark expand="xl">
         <MDBNavbarBrand>
           <strong className="white-text">Scrap Anything</strong>
         </MDBNavbarBrand>

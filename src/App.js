@@ -17,13 +17,13 @@ import 'mdbreact/dist/css/mdb.css';
 class App extends React.Component {
   render() {
     return (
-      <div className="container-fluid">
+      <>
         <header>
           <Router>
             <Routes />
             <Switch>
               <main>
-                <div className="container">
+                <div className="container-fluid">
                   <Route path="/about" exact>
                     <AboutusComponent />
                   </Route>
@@ -89,7 +89,7 @@ class App extends React.Component {
             <a href="#"> scrapanything.com</a>
           </div>
         </footer>
-      </div>
+      </>
     );
   }
 }

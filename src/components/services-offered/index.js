@@ -34,14 +34,12 @@ export default class ServicesOfferedComponent extends Component {
       (item) => item.pincode === Number(selectedOption.properties.pincode)
     );
     this.setState({selectedOptions: items});
-    console.log(items);
   }
 
   render() {
     return (
-      <div className="row ml-5 pt-md-5 mb-5">
-        <div className="col-lg-xl">
-          <br />
+      <div className="row ml-1 mb-5">
+        <div>
           <br />
           <h3>Services Offered and Pricing:</h3>
           <br />
@@ -52,7 +50,7 @@ export default class ServicesOfferedComponent extends Component {
             />
             <MDBRow>
               {this.state.selectedOptions.map((option, optKey) => (
-                <MDBCol md="2" key={optKey} className="pt-4">
+                <MDBCol md="4" key={optKey} className="pt-4">
                   <MDBCard>
                     <MDBCardBody cascade className="text-center">
                       <MDBCardTitle className="card-title">

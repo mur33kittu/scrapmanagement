@@ -54,7 +54,7 @@ export class Autocomplete extends Component {
           {this.state.filteredOptions.length > 0 && (
             <ul>
               {this.state.filteredOptions.map((option, p) => (
-                <MDBListGroup style={{width: '22rem'}} key={p}>
+                <MDBListGroup key={p}>
                   <MDBListGroupItem
                     active
                     href="#"
