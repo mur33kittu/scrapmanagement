@@ -25,9 +25,18 @@ export default class ServicesOfferedComponent extends Component {
     this.pinCode = PinCode.features;
     this.state = {
       selectedOptions: [],
+      modalShow: false,
+      selectedItem: {},
     };
     this.selectedOptionData = this.selectedOptionData.bind(this);
   }
+
+  toggle = (option) => {
+    this.setState({
+      modalShow: true,
+      selectedItem: option,
+    });
+  };
 
   selectedOptionData(selectedOption) {
     const items = ServiceItems.items.filter(
@@ -62,11 +71,24 @@ export default class ServicesOfferedComponent extends Component {
                       </p>
 
                       <MDBCardText>Price: {option.value}</MDBCardText>
+                      <MDBBtn
+                        rounded
+                        color="info"
+                        onClick={() => this.toggle(option)}
+                      >
+                        Calculate Price
+                      </MDBBtn>
                     </MDBCardBody>
                   </MDBCard>
                 </MDBCol>
               ))}
             </MDBRow>
+            {this.state.selectedItem && this.state.modalShow && (
+              <Modal
+                modalShow={this.state.modalShow}
+                data={this.state.selectedItem}
+              />
+            )}
           </MDBContainer>
         </div>
       </div>

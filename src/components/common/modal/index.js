@@ -6,49 +6,58 @@ import {
   MDBModalBody,
   MDBModalHeader,
   MDBModalFooter,
+  MDBCol,
 } from 'mdbreact';
 
 class Modal extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-    // console.log(this.props.data);
+    this.state = {
+      modalShow: props.modalShow,
+      data: props.data,
+      calculatedValue: 0,
+    };
+    this.toggleModal = this.toggleModal.bind(this);
   }
-  state = {
-    modal8: false,
-    modal9: false,
+
+  toggleModal = () => {
+    this.setState({modalShow: false});
   };
 
-  toggle = (nr) => () => {
-    let modalNumber = 'modal' + nr;
-    this.setState({
-      [modalNumber]: !this.state[modalNumber],
-    });
+  onChangeCalculate = (e) => {
+    this.setState({calculatedValue: this.props.data.value * e.target.value});
   };
-
   render() {
     return (
       <MDBContainer>
-        <MDBBtn color="info" onClick={this.toggle(9)}>
-          Calculate Cost
-        </MDBBtn>
-        <MDBModal
-          isOpen={this.state.modal9}
-          toggle={this.toggle(9)}
-          fullHeight
-          position="bottom"
-        >
-          <MDBModalHeader toggle={this.toggle(9)}>
-            Title Goes here
+        <MDBModal isOpen={this.props.modalShow} centered>
+          <MDBModalHeader toggle={this.toggleModal}>
+            <strong>{this.props.data.text}</strong>
           </MDBModalHeader>
           <MDBModalBody>
-            Modal Goes here
+            <div>Title: {this.props.data.text}</div>
+            <div>Price: {this.props.data.value}</div>
+            <div>Pincode: {this.props.data.pincode}</div>
+            <div>
+              Quantity:
+              <input
+                className="form-control"
+                type="text"
+                placeholder="Enter Quantity"
+                aria-label="Search"
+                onChange={this.onChangeCalculate}
+              />
+              <div>Calculated Value: {this.state.calculatedValue}</div>
+            </div>
           </MDBModalBody>
           <MDBModalFooter>
-            <MDBBtn color="secondary" onClick={this.toggle(9)}>
+            <MDBBtn color="secondary" onClick={this.toggleModal}>
               Close
             </MDBBtn>
-            <MDBBtn color="primary">Save changes</MDBBtn>
+            <MDBBtn color="primary" onClick={this.toggleModal}>
+              Save changes
+            </MDBBtn>
           </MDBModalFooter>
         </MDBModal>
       </MDBContainer>
