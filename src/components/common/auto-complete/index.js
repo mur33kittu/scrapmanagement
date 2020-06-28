@@ -56,18 +56,19 @@ export class Autocomplete extends Component {
           {this.state.filteredOptions.length > 0 && (
             <ul>
               {this.state.filteredOptions.map((option, p) => (
-                <MDBListGroup key={p}>
+                <MDBListGroup key={p} className="mx-4">
                   <MDBListGroupItem
+                    color="info"
                     active
                     href="#"
                     onClick={() => this.onSelect(option)}
                   >
-                    <div className="d-flex w-150 justify-content-between">
-                      <div>
+                    <MDBCol className="d-flex justify-content-between">
+                      <small>
                         {option.properties.name}, {option.properties.district}
-                      </div>
+                      </small>
                       <small>{option.properties.pincode}</small>
-                    </div>
+                    </MDBCol>
                   </MDBListGroupItem>
                 </MDBListGroup>
               ))}
