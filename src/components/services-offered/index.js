@@ -6,19 +6,20 @@ import {
   MDBRow,
   MDBCol,
   MDBCard,
-  MDBView,
-  MDBCardImage,
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,
   MDBIcon,
   MDBBtn,
+  MDBBadge,
 } from 'mdbreact';
 import PinCode from '../../assets/json/pincode.json';
 import Autocomplete from '../common/auto-complete';
 import ServiceItems from '../../assets/json/services_offered.json';
+// import {MapContainer} from '../maps-container';
+import {Map, GoogleApiWrapper} from 'google-maps-react';
 
-export default class ServicesOfferedComponent extends Component {
+class ServicesOfferedComponent extends Component {
   constructor(props) {
     super(props);
     this.props = props;
@@ -27,14 +28,32 @@ export default class ServicesOfferedComponent extends Component {
       selectedOptions: [],
       modalShow: false,
       selectedItem: {},
+      calculatedValue: 0,
+      selectedAddress: [],
+      showCalculation: false,
+      showMaps: false,
     };
     this.selectedOptionData = this.selectedOptionData.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.setOption = this.setOption.bind(this);
+    this.showMap = this.showMap.bind(this);
   }
 
-  toggle = (option) => {
+  toggle = (opt) => {
     this.setState({
+      modalShow: opt.modalShow,
+      option: opt.option,
+      showCalculation: true,
+      showMaps: false,
+    });
+  };
+
+  setOption = (opt) => {
+    this.setState({
+      selectedItem: opt.option,
       modalShow: true,
-      selectedItem: option,
+      showCalculation: true,
+      showMaps: false,
     });
   };
 
@@ -45,7 +64,31 @@ export default class ServicesOfferedComponent extends Component {
     this.setState({selectedOptions: items});
   }
 
+  onChangeCalculate = (e) => {
+    this.setState({
+      calculatedValue: this.state.selectedItem.value * e.target.value,
+    });
+  };
+
+  selectedArea = (e) => {
+    this.setState({
+      selectedAddress: e,
+    });
+  };
+
+  showMap() {
+    this.setState({
+      modalShow: true,
+      showCalculation: false,
+      showMaps: true,
+      selectedItem: {},
+    });
+  }
+
   render() {
+    const address =
+      this.state.selectedAddress.length > 0 &&
+      this.state.selectedAddress[0].properties;
     return (
       <div className="row ml-1 mb-5">
         <div>
@@ -53,10 +96,32 @@ export default class ServicesOfferedComponent extends Component {
           <h3>Services Offered and Pricing:</h3>
           <br />
           <MDBContainer>
-            <Autocomplete
-              opts={this.pinCode}
-              selectedOption={this.selectedOptionData}
-            />
+            <MDBRow>
+              <Autocomplete
+                opts={this.pinCode}
+                selectedOption={this.selectedOptionData}
+                selectedArea={this.selectedArea}
+              />
+              <MDBCol md="6">
+                {address ? (
+                  <MDBBadge
+                    pill
+                    color="success"
+                    onClick={this.showMap}
+                    className="show-pointer"
+                    tag="address"
+                  >
+                    {address.name}, {address.district}, {address.state}.{' '}
+                    {address.pincode}&nbsp;
+                    <MDBIcon icon="map-marker-alt" />
+                  </MDBBadge>
+                ) : (
+                  <MDBBadge pill color="success">
+                    No Records Found
+                  </MDBBadge>
+                )}
+              </MDBCol>
+            </MDBRow>
             <MDBRow>
               {this.state.selectedOptions.map((option, optKey) => (
                 <MDBCol md="4" key={optKey} className="pt-4">
@@ -74,7 +139,12 @@ export default class ServicesOfferedComponent extends Component {
                       <MDBBtn
                         rounded
                         color="info"
-                        onClick={() => this.toggle(option)}
+                        onClick={() =>
+                          this.setOption({
+                            option: option,
+                            modalShow: true,
+                          })
+                        }
                       >
                         Calculate Price
                       </MDBBtn>
@@ -83,11 +153,57 @@ export default class ServicesOfferedComponent extends Component {
                 </MDBCol>
               ))}
             </MDBRow>
-            {this.state.selectedItem && this.state.modalShow && (
+            {this.state.modalShow && (
               <Modal
                 modalShow={this.state.modalShow}
                 data={this.state.selectedItem}
-              />
+                showModal={this.toggle}
+                title={<div>{this.state.selectedItem.text}</div>}
+              >
+                {this.state.showCalculation && (
+                  <div>
+                    <MDBCol md="6">
+                      Price: <small>{this.state.selectedItem.value}</small>
+                    </MDBCol>
+                    <MDBCol md="6">
+                      Pincode: <small>{this.state.selectedItem.pincode}</small>
+                    </MDBCol>
+                    <MDBCol md="6">
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="Quantity in numbers"
+                        aria-label="Search"
+                        onChange={this.onChangeCalculate}
+                      />
+                    </MDBCol>
+                    <MDBCol md="6">
+                      Calculated Value:{' '}
+                      <small>{this.state.calculatedValue}</small>
+                    </MDBCol>
+                  </div>
+                )}
+                {this.state.showMaps && (
+                  <div
+                    id="map-container"
+                    className="rounded z-depth-1-half map-container"
+                    style={{height: '400px'}}
+                  >
+                    {this.state.selectedAddress[0].properties.name},{' '}
+                    {this.state.selectedAddress[0].properties.city},{' '}
+                    {this.state.selectedAddress[0].properties.state},{' '}
+                    {this.state.selectedAddress[0].properties.pincode}
+                    <iframe
+                      src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${this.state.selectedAddress[0].properties.pincode}`}
+                      title="This is a unique title"
+                      width="100%"
+                      height="100%"
+                      frameBorder="0"
+                      style={{border: 0}}
+                    />
+                  </div>
+                )}
+              </Modal>
             )}
           </MDBContainer>
         </div>
@@ -95,3 +211,9 @@ export default class ServicesOfferedComponent extends Component {
     );
   }
 }
+
+export default ServicesOfferedComponent;
+
+// export default GoogleApiWrapper({
+//   apiKey: process.env.REACT_APP_API_KEY,
+// })(ServicesOfferedComponent);

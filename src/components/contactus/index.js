@@ -1,5 +1,18 @@
 import React, {Component} from 'react';
 import MapContainer from '../maps-container';
+import {
+  MDBIcon,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardGroup,
+  MDBCardImage,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBBtn,
+} from 'mdbreact';
 
 export default class ContactusComponent extends Component {
   constructor() {
@@ -44,13 +57,25 @@ export default class ContactusComponent extends Component {
   }
   render() {
     return (
-      <>
+      <MDBContainer>
         <br />
         <br />
-        <p className="h4">Contact Us</p>
+        <h3>Contact Us:</h3>
         <br />
-        {this.contacts && <MapContainer contacts={this.contacts} />}
-      </>
+        <MDBRow>
+          {this.contacts.map((contact) => (
+            <MDBCol style={{maxWidth: '22rem'}} md="8" className="pt-5">
+              <MDBCard>
+                <MDBCardBody>
+                  <MDBCardTitle>{contact.name}</MDBCardTitle>
+                  <MDBCardText>{contact.address}</MDBCardText>
+                  <MDBBtn href="#">Click</MDBBtn>
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCol>
+          ))}
+        </MDBRow>
+      </MDBContainer>
     );
   }
 }

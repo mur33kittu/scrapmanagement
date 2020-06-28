@@ -6,51 +6,27 @@ import {
   MDBModalBody,
   MDBModalHeader,
   MDBModalFooter,
-  MDBCol,
 } from 'mdbreact';
 
 class Modal extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-    this.state = {
-      modalShow: props.modalShow,
-      data: props.data,
-      calculatedValue: 0,
-    };
     this.toggleModal = this.toggleModal.bind(this);
   }
 
-  toggleModal = () => {
-    this.setState({modalShow: false});
+  toggleModal = (opt) => {
+    this.props.showModal({data: opt.data, option: opt.modalShow});
   };
 
-  onChangeCalculate = (e) => {
-    this.setState({calculatedValue: this.props.data.value * e.target.value});
-  };
   render() {
     return (
       <MDBContainer>
         <MDBModal isOpen={this.props.modalShow} centered>
           <MDBModalHeader toggle={this.toggleModal}>
-            <strong>{this.props.data.text}</strong>
+            {this.props.title}
           </MDBModalHeader>
-          <MDBModalBody>
-            <div>Title: {this.props.data.text}</div>
-            <div>Price: {this.props.data.value}</div>
-            <div>Pincode: {this.props.data.pincode}</div>
-            <div>
-              Quantity:
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Enter Quantity"
-                aria-label="Search"
-                onChange={this.onChangeCalculate}
-              />
-              <div>Calculated Value: {this.state.calculatedValue}</div>
-            </div>
-          </MDBModalBody>
+          <MDBModalBody>{this.props.children}</MDBModalBody>
           <MDBModalFooter>
             <MDBBtn color="secondary" onClick={this.toggleModal}>
               Close

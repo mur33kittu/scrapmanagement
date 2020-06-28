@@ -5,6 +5,7 @@ import {
   MDBCol,
   MDBFormInline,
   MDBIcon,
+  MDBContainer,
 } from 'mdbreact';
 
 export class Autocomplete extends Component {
@@ -33,10 +34,11 @@ export class Autocomplete extends Component {
     this.setState({
       filteredOptions,
     });
+    this.props.selectedArea(filteredOptions);
   };
   render() {
     return (
-      <React.Fragment>
+      <MDBContainer>
         <div className="search">
           <MDBCol>
             <MDBFormInline className="md-form">
@@ -58,7 +60,6 @@ export class Autocomplete extends Component {
                   <MDBListGroupItem
                     active
                     href="#"
-                    action
                     onClick={() => this.onSelect(option)}
                   >
                     <div className="d-flex w-150 justify-content-between">
@@ -73,7 +74,7 @@ export class Autocomplete extends Component {
             </ul>
           )}
         </div>
-      </React.Fragment>
+      </MDBContainer>
     );
   }
 }
