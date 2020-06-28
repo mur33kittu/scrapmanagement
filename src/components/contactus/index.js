@@ -69,6 +69,7 @@ export default class ContactusComponent extends Component {
                 <MDBCardBody>
                   <MDBCardTitle>{contact.name}</MDBCardTitle>
                   <MDBCardText>{contact.address}</MDBCardText>
+                  <MDBCardText>{contact.phone}</MDBCardText>
                   <MDBBtn href="#">Click</MDBBtn>
                 </MDBCardBody>
               </MDBCard>
