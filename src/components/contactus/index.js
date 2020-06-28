@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
-import MapContainer from '../maps-container';
+
 import {
-  MDBIcon,
   MDBContainer,
   MDBRow,
   MDBCol,
   MDBCard,
-  MDBCardGroup,
-  MDBCardImage,
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,

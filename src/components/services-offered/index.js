@@ -17,7 +17,7 @@ import PinCode from '../../assets/json/pincode.json';
 import Autocomplete from '../common/auto-complete';
 import ServiceItems from '../../assets/json/services_offered.json';
 // import {MapContainer} from '../maps-container';
-import {Map, GoogleApiWrapper} from 'google-maps-react';
+// import {Map, GoogleApiWrapper} from 'google-maps-react';
 
 class ServicesOfferedComponent extends Component {
   constructor(props) {
