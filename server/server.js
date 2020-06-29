@@ -1,22 +1,20 @@
-'use strict';
 const express = require('express');
-const path = require('path');
-const serverless = require('serverless-http');
-const app = express();
+const mongoose = require('mongoose'); // new
 const bodyParser = require('body-parser');
+const apiRouter = require('./api');
 
-const router = express.Router();
-router.get('/', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.write('<h1>Hello from Express.js!</h1>');
-  res.end();
-});
-router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
-router.post('/', (req, res) => res.json({ postBody: req.body }));
-
-app.use(bodyParser.json());
-app.use('/.netlify/functions/server', router);  // path must route to lambda
-app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
-
-module.exports = app;
-module.exports.handler = serverless(app);
+// Connect to MongoDB database
+mongoose
+  .connect('mongodb://localhost:27017/scrap', {useNewUrlParser: true})
+  .then(() => {
+    const app = express();
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(bodyParser.json());
+    app.use('/api', apiRouter);
+    app.listen(5000, () => {
+      console.log('Server has started!');
+    });
+  })
+  .catch((err) => {
+    console.log('Error connecting Mongodb', JSON.stringify(err));
+  });
