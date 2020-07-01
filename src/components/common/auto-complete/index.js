@@ -28,8 +28,10 @@ export class Autocomplete extends Component {
     const userInput = e.currentTarget.value;
     const filteredOptions = options.filter(
       (option) =>
-        option.properties.name.toLowerCase().indexOf(userInput.toLowerCase()) >
-          -1 || option.properties.pincode.indexOf(userInput.toLowerCase()) > -1
+        option.properties[0].name
+          .toLowerCase()
+          .indexOf(userInput.toLowerCase()) > -1 ||
+        option.properties[0].pincode.indexOf(userInput.toLowerCase()) > -1
     );
     this.setState({
       filteredOptions,
@@ -65,9 +67,9 @@ export class Autocomplete extends Component {
                   >
                     <MDBCol className="d-flex justify-content-between">
                       <small>
-                        {option.properties.name}, {option.properties.district}
+                        {option.properties[0].name}, {option.properties[0].district}
                       </small>
-                      <small>{option.properties.pincode}</small>
+                      <small>{option.properties[0].pincode}</small>
                     </MDBCol>
                   </MDBListGroupItem>
                 </MDBListGroup>

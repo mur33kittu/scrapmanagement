@@ -2,16 +2,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var ServicesOfferedSchema = new Schema({
-  type: {
-    type: 'String',
+  text: {
+    type: String,
     required: true,
   },
-  properties: {
-    type: [],
+  value: {
+    type: Number,
     required: true,
+    default: 0,
   },
-  geometry: {
-    type: [],
+  pincode: {
+    type: Number,
     required: true,
   },
 });

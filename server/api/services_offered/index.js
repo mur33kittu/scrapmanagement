@@ -4,13 +4,14 @@ const router = require('express').Router();
 
 const ServicesOffered = mongoose.model(
   'services_offered',
-  ServicesOfferedSchema
+  ServicesOfferedSchema,
+  'services_offered'
 );
 
 router.get('/', async (req, res) => {
   await ServicesOffered.find()
-    .then((res) => {
-      res.status(200).send(res);
+    .then((result) => {
+      res.status(200).send(result);
     })
     .catch((err) => {
       res.status(500).send(err);

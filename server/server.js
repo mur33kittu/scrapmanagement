@@ -3,6 +3,9 @@ const mongoose = require('mongoose'); // new
 const bodyParser = require('body-parser');
 const apiRouter = require('./api');
 
+mongoose.set('debug', (collectionName, method, query, doc) => {
+  console.log(`${collectionName}.${method}`, JSON.stringify(query), doc);
+});
 // Connect to MongoDB database
 mongoose
   .connect('mongodb://localhost:27017/scrap', {useNewUrlParser: true})
@@ -18,3 +21,6 @@ mongoose
   .catch((err) => {
     console.log('Error connecting Mongodb', JSON.stringify(err));
   });
+mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false)
+mongoose.pluralize(null);

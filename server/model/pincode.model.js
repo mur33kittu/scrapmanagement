@@ -3,8 +3,14 @@ const Schema = mongoose.Schema;
 
 var PinCodeSchema = new Schema({
   items: {
-    type: [],
+    type: String,
     required: true,
+  },
+  properties: {
+    type: Array,
+  },
+  geometry: {
+    type: Array,
   },
 });
 

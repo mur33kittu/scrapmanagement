@@ -3,15 +3,22 @@ import {MDBIcon, MDBBadge} from 'mdbreact';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import {GrGoogle, GrFacebookOption} from 'react-icons/gr';
+import {UserService} from '../../services/axios/user.service';
 
 class LoginFormComponent extends Component {
   state = {
     name: '',
     loginType: '',
+    userObject: {},
   };
 
   responseFacebook = (response) => {
-    this.setState({name: response.name, loginType: 'facebook'});
+    this.setState({
+      name: response.name,
+      loginType: 'facebook',
+      userObject: response,
+    });
+    this.saveUserInformation(response.profileObj);
   };
 
   responseGoogle = (response) => {
@@ -19,8 +26,18 @@ class LoginFormComponent extends Component {
       name:
         response.profileObj.givenName + ' ' + response.profileObj.familyName,
       loginType: 'google',
+      userObject: response,
     });
+    this.saveUserInformation(response.profileObj);
   };
+
+  saveUserInformation(data) {
+    if (data) {
+      UserService.updateUserInfo(data)
+        .then((res) => console.log(res))
+        .catch((err) => console.log('Error updating information', err));
+    }
+  }
 
   render() {
     return (
@@ -37,7 +54,8 @@ class LoginFormComponent extends Component {
             <div className="modal-content">
               <div className="modal-header light-blue darken-3 white-text">
                 <h4 className="title">
-                  <i className="fas fa-users"></i> Login with your Social Network
+                  <i className="fas fa-users"></i> Login with your Social
+                  Network
                 </h4>
                 <button
                   type="button"
@@ -80,7 +98,7 @@ class LoginFormComponent extends Component {
                 <MDBIcon fab icon="google" />
               )}
               {this.state.name}
-            </MDBBadge>            
+            </MDBBadge>
           </div>
         </div>
       </>

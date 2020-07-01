@@ -13,9 +13,11 @@ import {
   MDBBtn,
   MDBBadge,
 } from 'mdbreact';
-import PinCode from '../../assets/json/pincode.json';
+// import PinCode from '../../assets/json/pincode.json';
 import Autocomplete from '../common/auto-complete';
-import ServiceItems from '../../assets/json/services_offered.json';
+import {ServicesOfferedService} from '../../services/axios/servicesoffered.service';
+import {PinCodeService} from '../../services/axios/pincode';
+// import ServiceItems from '../../assets/json/services_offered.json';
 // import {MapContainer} from '../maps-container';
 // import {Map, GoogleApiWrapper} from 'google-maps-react';
 
@@ -23,7 +25,7 @@ class ServicesOfferedComponent extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-    this.pinCode = PinCode.features;
+    // this.pinCode = PinCode.features;
     this.state = {
       selectedOptions: [],
       modalShow: false,
@@ -32,11 +34,23 @@ class ServicesOfferedComponent extends Component {
       selectedAddress: [],
       showCalculation: false,
       showMaps: false,
+      serviceItems: [],
+      pinCodes: [],
     };
     this.selectedOptionData = this.selectedOptionData.bind(this);
     this.toggle = this.toggle.bind(this);
     this.setOption = this.setOption.bind(this);
     this.showMap = this.showMap.bind(this);
+  }
+
+  componentDidMount() {
+    ServicesOfferedService.getOfferedServices().then((data) => {
+      this.setState({serviceItems: data});
+    });
+    PinCodeService.getPincodes().then((data) => {
+      this.setState({pinCodes: data});
+      this.pinCode = data.properties;
+    });
   }
 
   toggle = (opt) => {
@@ -58,8 +72,8 @@ class ServicesOfferedComponent extends Component {
   };
 
   selectedOptionData(selectedOption) {
-    const items = ServiceItems.items.filter(
-      (item) => item.pincode === Number(selectedOption.properties.pincode)
+    const items = this.state.serviceItems.data.filter(
+      (item) => item.pincode === Number(selectedOption.properties[0].pincode)
     );
     this.setState({selectedOptions: items});
   }
@@ -88,7 +102,7 @@ class ServicesOfferedComponent extends Component {
   render() {
     const address =
       this.state.selectedAddress.length > 0 &&
-      this.state.selectedAddress[0].properties;
+      this.state.selectedAddress[0].properties[0];
     return (
       <div className="row ml-1 mb-5">
         <div>
@@ -98,7 +112,7 @@ class ServicesOfferedComponent extends Component {
           <MDBContainer>
             <MDBRow>
               <Autocomplete
-                opts={this.pinCode}
+                opts={this.state.pinCodes.data}
                 selectedOption={this.selectedOptionData}
                 selectedArea={this.selectedArea}
               />
@@ -189,13 +203,13 @@ class ServicesOfferedComponent extends Component {
                     className="rounded z-depth-1-half map-container"
                     style={{height: '400px'}}
                   >
-                    {this.state.selectedAddress[0].properties.name},{' '}
-                    {this.state.selectedAddress[0].properties.city},{' '}
-                    {this.state.selectedAddress[0].properties.state},{' '}
-                    {this.state.selectedAddress[0].properties.pincode}
+                    {this.state.selectedAddress[0].properties[0].name},{' '}
+                    {this.state.selectedAddress[0].properties[0].city},{' '}
+                    {this.state.selectedAddress[0].properties[0].state},{' '}
+                    {this.state.selectedAddress[0].properties[0].pincode}
                     <iframe
-                      src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${this.state.selectedAddress[0].properties.pincode}`}
-                      title="This is a unique title"
+                      src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${this.state.selectedAddress[0].properties[0].pincode}`}
+                      title={`${this.state.selectedAddress[0].properties[0].name}`}
                       width="100%"
                       height="100%"
                       frameBorder="0"
