@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const updateUserInfo = (jsonData) => {
   return axios
-    .post('/api/user', jsonData)
+    .post(process.env.REACT_APP_SERVICE_URL + '/user', jsonData)
     .then((result) => {
       return result;
     })
@@ -13,5 +13,5 @@ const updateUserInfo = (jsonData) => {
 };
 
 export const UserService = {
-    updateUserInfo: updateUserInfo,
+  updateUserInfo: updateUserInfo,
 };

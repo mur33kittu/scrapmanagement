@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const getOfferedServices = () => {
   return axios
-    .get('/api/servicesoffered')
+    .get(process.env.REACT_APP_SERVICE_URL + '/servicesoffered')
     .then((result) => {
       return result;
     })

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const getPincodes = () => {
   return axios
-    .get('/api/pincode')
+    .get(process.env.REACT_APP_SERVICE_URL + '/pincode')
     .then((result) => {
       return result;
     })
