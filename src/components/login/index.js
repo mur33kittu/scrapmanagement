@@ -13,22 +13,26 @@ class LoginFormComponent extends Component {
   };
 
   responseFacebook = (response) => {
-    this.setState({
-      name: response.name,
-      loginType: 'facebook',
-      userObject: response,
-    });
-    this.saveUserInformation(response.profileObj);
+    if (response) {
+      this.setState({
+        name: response.name,
+        loginType: 'facebook',
+        userObject: response,
+      });
+      this.saveUserInformation(response.profileObj);
+    }
   };
 
   responseGoogle = (response) => {
-    this.setState({
-      name:
-        response.profileObj.givenName + ' ' + response.profileObj.familyName,
-      loginType: 'google',
-      userObject: response,
-    });
-    this.saveUserInformation(response.profileObj);
+    if (response) {
+      this.setState({
+        name:
+          response.profileObj.givenName + ' ' + response.profileObj.familyName,
+        loginType: 'google',
+        userObject: response,
+      });
+      this.saveUserInformation(response.profileObj);
+    }
   };
 
   saveUserInformation(data) {
