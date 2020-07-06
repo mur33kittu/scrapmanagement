@@ -75,7 +75,9 @@ class ServicesOfferedComponent extends Component {
     const items = this.state.serviceItems.data.filter(
       (item) => item.pincode === Number(selectedOption.properties[0].pincode)
     );
-    this.setState({selectedOptions: items});
+    this.setState({selectedOptions: items}, () => {
+      console.log(this.state.selectedOptions);
+    });
   }
 
   onChangeCalculate = (e) => {

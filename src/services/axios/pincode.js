@@ -13,5 +13,5 @@ const getPincodes = () => {
 };
 
 export const PinCodeService = {
-    getPincodes: getPincodes,
+  getPincodes: getPincodes,
 };
