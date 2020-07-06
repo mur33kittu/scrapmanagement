@@ -13,7 +13,7 @@ class LoginFormComponent extends Component {
   };
 
   responseFacebook = (response) => {
-    if (response) {
+    if (response && response.profileObj) {
       this.setState({
         name: response.name,
         loginType: 'facebook',
@@ -24,7 +24,7 @@ class LoginFormComponent extends Component {
   };
 
   responseGoogle = (response) => {
-    if (response) {
+    if (response && response.profileObj) {
       this.setState({
         name:
           response.profileObj.givenName + ' ' + response.profileObj.familyName,
